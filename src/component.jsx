@@ -1,12 +1,10 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
-
-function component() {
+function FullNameForm() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [fullName, setFullName] = useState('');
   const [formError, setFormError] = useState('');
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -18,29 +16,28 @@ function component() {
     }
   };
 
-
   return (
     <div className="fullname-form">
-    <h1>Enter your Full Name</h1>
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="First Name"
-        value={firstName}
-        onChange={(e) => setFirstName(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Last Name"
-        value={lastName}
-        onChange={(e) => setLastName(e.target.value)}
-      />
-      <button type="submit">Submit</button>
-    </form>
-    {fullName && <h2>Your Full Name: {fullName}</h2>}
-    {formError && <p className="error">{formError}</p>}
-  </div>
-  )
+      <h1>Enter your Full Name</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="First Name"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Last Name"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+        />
+        <button type="submit" disabled={firstName.trim() === '' || lastName.trim() === ''}>Submit</button>
+      </form>
+      {fullName && <h2>Your Full Name: {fullName}</h2>}
+      {formError && <p className="error">{formError}</p>}
+    </div>
+  );
 }
 
-export default component
+export default FullNameForm;
