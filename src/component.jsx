@@ -20,22 +20,18 @@ function FullNameForm() {
     <div className="fullname-form">
       <h1>Enter your Full Name</h1>
       <form onSubmit={handleSubmit}>
-      <label for="fname">First name:</label> 
         <input
           type="text"
+          placeholder="First Name"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
         />
-        <br></br>
-      <label for="fname">Last name:</label> 
-
         <input
           type="text"
+          placeholder="Last Name"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
         />
-          <br></br>
-
         <button type="submit" disabled={firstName.trim() === '' || lastName.trim() === ''}>Submit</button>
       </form>
       {fullName && <h2>Your Full Name: {fullName}</h2>}
