@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import './App.css';
 
-function FullNameForm() {
+const DisplayNameForm = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [fullName, setFullName] = useState('');
@@ -8,36 +9,58 @@ function FullNameForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (firstName.trim() === '' || lastName.trim() === '') {
-      setFormError('Please fill in both first name and last name.');
-    } else {
-      setFullName(`${firstName} ${lastName}`);
+    if (firstName.trim() !== '' && lastName.trim() !== '') {
+      setFullName(`Full Name: ${firstName} ${lastName}`);
       setFormError('');
+    } else {
+      setFullName('');
+      setFormError('Please fill out both fields.');
     }
   };
 
   return (
-    <div className="fullname-form">
-      <h1>Enter your Full Name</h1>
+    <div className="centered-form">
+      <h2>Full Name Display</h2>
+
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="First Name"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Last Name"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-        />
-        <button type="submit" disabled={firstName.trim() === '' || lastName.trim() === ''}>Submit</button>
+        <div>
+          <label htmlFor="firstName">First Name:</label>
+          <input
+            type="text"
+            id="firstName"
+            name="firstName"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          />
+        </div>
+        
+        <div>
+          <label htmlFor="lastName">Last Name:</label>
+          <input
+            type="text"
+            id="lastName"
+            name="lastName"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+          />
+        </div>
+
+        <button type="submit">
+          Submit
+        </button>
+
+        {formError && <div className="error">{formError}</div>}
       </form>
-      {fullName && <h2>Your Full Name: {fullName}</h2>}
-      {formError && <p className="error">{formError}</p>}
+
+      {fullName && (
+        <div className="full-name">{fullName}</div>
+      )}
     </div>
   );
-}
+};
 
-export default FullNameForm;
+export default DisplayNameForm;
+
+
